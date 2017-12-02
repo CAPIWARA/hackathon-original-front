@@ -13,14 +13,14 @@
 
 <script>
   import * as types from '../../store/types'
-  import { mapGetters, mapActions } from 'vuex'
+  import { mapActions } from 'vuex'
   import TaskItem from './TaskItem'
 
   export default {
     components: { TaskItem },
-    computed: mapGetters({
-      tasks: types.TASKS
-    }),
+    props: {
+      tasks: Array
+    },
     methods: mapActions({
       exclude: types.TASKS_EXCLUDE
     })

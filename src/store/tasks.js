@@ -1,4 +1,5 @@
 import * as types from './types'
+import axios from 'axios'
 
 const state = {
   tasks: [
@@ -23,13 +24,18 @@ const mutations = {
 }
 
 const actions = {
-  [types.TASKS_INCLUDE]: async ({ commit, getters }, payload) => {
-    const tasks = [ ...getters[types.TASKS], payload ]
+  [types.TASKS]: async ({ commit }) => {
+    const { data: tasks } = await axios.get('/task')
     commit(types.TASKS, tasks)
   },
-  [types.TASKS_EXCLUDE]: async ({ commit, getters }, payload) => {
-    const tasks = getters[types.TASKS].filter((task) => task.id !== payload)
-    commit(types.TASKS, tasks)
+  [types.TASKS_INCLUDE]: async ({ dispatch }, payload) => {
+    await axios.post('/task', payload)
+    await dispatch(types.TASKS)
+  },
+  [types.TASKS_EXCLUDE]: async ({ dispatch }, payload) => {
+    const task = { ...payload, status: 'deleted' }
+    await axios.put(`/task/${task.id}`, task)
+    await dispatch(types.TASKS)
   }
 }
 
