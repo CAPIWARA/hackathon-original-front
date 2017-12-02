@@ -6,6 +6,7 @@
       :is="component"
       :id="id"
       :type="component === 'input' ? type : null"
+      :rows="component === 'textarea' ? 4 : null"
       :value="value"
       :placeholder="placeholder"
       @input="input"
@@ -57,24 +58,35 @@
 </script>
 
 <style lang="scss">
+  @import '../../style/theme.scss';
+
   .form-field {
     margin: 0;
     padding: 0;
     border: 0 none transparent;
 
-    & > .label { display: block; }
+    & > .label {
+      display: block;
+      font-size: .9rem;
+      margin-bottom: .25rem;
+    }
 
     & > .field {
       box-sizing: border-box;
       display: block;
       width: 100%;
       padding: .5rem;
-      border: 2px solid #eaedef;
+      border: 0 none transparent;
+      border-radius: 0;
+      border-bottom: 2px solid $color-border;
+      background-color: rgba(#000, .025);
+      transition: border-bottom-color .3s ease;
     }
 
     & > .field:focus {
       outline: 0 none transparent;
       box-shadow: none;
+      border-bottom: 2px solid $color-primary;
     }
   }
 </style>

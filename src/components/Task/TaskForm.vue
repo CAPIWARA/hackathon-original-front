@@ -7,6 +7,7 @@
         type="text"
         class="field"
         label="Título"
+        placeholder="Ex. Arrumar o quarto"
       />
       <form-field
         v-model="description"
@@ -14,6 +15,7 @@
         type="textarea"
         class="field"
         label="Descrição"
+        placeholder="Ex. Guardar seus brinquedos e dobrar seus lençóis."
       />
       <form-field
         v-model="reward"
@@ -21,6 +23,7 @@
         type="number"
         class="field"
         label="Recompensa"
+        placeholder="Ex. 25,50"
       />
       <form-field
         v-model="recurrence"
@@ -32,7 +35,12 @@
         :options="recurrences"
       />
     </fieldset>
-    <button class="button" slot="actions" type="submit">Adicionar</button>
+    <button
+      class="button"
+      slot="actions"
+      type="submit"
+      :disabled="!isValid"
+    >Adicionar</button>
     <button class="button" slot="actions" type="reset">Limpar</button>
   </form-container>
 </template>
@@ -67,9 +75,16 @@
       return {
         title: '',
         description: '',
-        reward: 0,
+        reward: null,
         recurrence: '',
         recurrences
+      }
+    },
+    computed: {
+      isValid () {
+        const validate = (value) => typeof value === 'string' && value.trim() || value
+        const isValid = [this.title, this.description, this.reward, this.recurrence].every(validate)
+        return isValid
       }
     },
     methods: {

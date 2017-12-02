@@ -27,10 +27,14 @@
           description: this.description
         }
 
-        console.log('task', task)
-
         this.$emit('exclude', task)
       }
     }
   }
 </script>
+
+<style lang="scss">
+  .task-item {
+    list-style: none;
+  }
+</style>

@@ -8,7 +8,7 @@
 
     <hr>
 
-    <h2>Adicionar Tarefas</h2>
+    <h2>Adicionar uma Tarefa</h2>
 
     <task-form />
   </main>
@@ -31,9 +31,9 @@
       ...mapGetters({ tasks: types.TASKS }),
       filtered () {
         const tasks = [ ...this.tasks ].filter((task) => {
-          const isTaskDeleted = task.status === 'deleted'
-          const result = (isTaskDeleted && this.isDeleted) || (!isTaskDeleted && !this.isDeleted)
-          return result
+          if (this.isDeleted)
+            return task.status === 'deleted'
+          return task.status !== 'deleted'
         })
         return tasks
       }
