@@ -1,0 +1,24 @@
+{
+  "name": "hackathon-original-front",
+  "version": "0.1.0",
+  "description": "Aplicação Front-End para o Hackathon do banco Original realizado em 2 e 3 de Dezembro de 2017.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "poi src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CAPIWARA/hackathon-original-front.git"
+  },
+  "author": "Vitor Cavalcanti",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CAPIWARA/hackathon-original-front/issues"
+  },
+  "homepage": "https://github.com/CAPIWARA/hackathon-original-front#readme",
+  "devDependencies": {
+    "poi": "^9.5.5",
+    "vue": "^2.5.9"
+  }
+}

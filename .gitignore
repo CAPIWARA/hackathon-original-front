@@ -1,0 +1,6 @@
+# Módulos do Node.js
+node_modules/
+
+# Arquivos de log
+*.log
+*.log.*
