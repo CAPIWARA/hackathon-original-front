@@ -16,3 +16,20 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .form-container {
+    & > .fields,
+    & > .actions {
+      margin: 0;
+      padding: 0;
+      border: 0 none transparent;
+    }
+
+    & > .actions {
+      margin-top: 2.25rem;
+      border-top: 2px solid #eaedef;
+      text-align: right;
+    }
+  }
+</style>

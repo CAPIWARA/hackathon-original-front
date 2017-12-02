@@ -19,7 +19,17 @@
     },
     methods: {
       exclude () {
-        this.$emit('exclude', this.id)
+        const task = {
+          id: this.id,
+          title: this.title,
+          status: this.status,
+          reward: this.reward,
+          description: this.description
+        }
+
+        console.log('task', task)
+
+        this.$emit('exclude', task)
       }
     }
   }

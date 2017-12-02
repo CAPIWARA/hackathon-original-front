@@ -42,6 +42,25 @@
   import FormField from '../Form/FormField'
   import FormContainer from '../Form/FormContainer'
 
+  const recurrences = [
+    {
+      label: 'Nenhuma',
+      value: 'none'
+    },
+    {
+      label: 'Diária',
+      value: 'daily'
+    },
+    {
+      label: 'Semanal',
+      value: 'weekly'
+    },
+    {
+      label: 'Mensal',
+      value: 'monthly'
+    }
+  ]
+
   export default {
     components: { FormContainer, FormField },
     data () {
@@ -50,15 +69,16 @@
         description: '',
         reward: 0,
         recurrence: '',
-        recurrences: ['Nenhuma', 'Diária', 'Semanal', 'Mensal']
+        recurrences
       }
     },
     methods: {
       include () {
         const task = {
           title: this.title,
-          title: this.description,
+          description: this.description,
           reward: this.reward,
+          recurrence: this.recurrence,
           status: 'pending'
         }
 
