@@ -28,5 +28,9 @@ export default [
     alias: '/',
     beforeEnter: isPermissionChildren,
     component: () => import('../views/Home')
+  },
+  {
+    path: '/example',
+    component: () => import('../views/IOT')
   }
 ]

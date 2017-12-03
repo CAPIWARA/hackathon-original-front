@@ -33,6 +33,7 @@
 <style lang="scss">
   .task-list {
     list-style: none;
+    width: 100%;
     margin: 0;
     padding: .5rem 1rem;
 
