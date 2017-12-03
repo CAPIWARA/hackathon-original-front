@@ -1,9 +1,11 @@
 <template>
-  <form-container class="task-view">
-    <h1 class="title">
-      <span>Tarefas</span>
-      <router-link class="button" to="/task">Cadastrar Tarefas</router-link>
-    </h1>
+  <view-container class="tasks-view" :is-loading="isLoading">
+    <span slot="title">Tarefas</span>
+    <router-link
+      to="/task"
+      slot="title"
+      class="button"
+    >Cadastrar Tarefas</router-link>
 
     <template v-if="tasks.length">
       <navigation-tabs :tabs="tabs" />
@@ -16,21 +18,26 @@
       <router-link to="/task" class="button">Cadastrar Tarefas</router-link>
     </section>
 
-    <button slot="actions" class="button" type="submit">Confirmar</button>
-  </form-container>
+    <button
+      slot="footer"
+      class="button"
+      @click="update"
+    >Confirmar</button>
+  </view-container>
 </template>
 
 <script>
-  import * as types from '../../store/types'
-  import FormContainer from '../Form/FormContainer'
-  import TaskList from './TaskList'
-  import NavigationTabs from '../Navigation/NavigationTabs'
+  import * as types     from '../store/types'
   import { mapGetters } from 'vuex'
+  import ViewContainer  from '../components/View/ViewContainer'
+  import TaskList       from '../components/Task/TaskList'
+  import NavigationTabs from '../components/Navigation/NavigationTabs'
 
   export default {
-    components: { FormContainer, TaskList, NavigationTabs },
+    components: { ViewContainer, TaskList, NavigationTabs },
     data () {
       return {
+        isLoading: false,
         tabs: [
           {
             text: 'Todas',
@@ -58,8 +65,17 @@
         return tasks
       }
     },
-    mounted () {
-      this.$store.dispatch(types.TASKS)
+    methods: {
+      async update () {
+        this.isLoading = true
+        await this.$store.dispatch(types.TASKS_UPDATE)
+        this.isLoading = false
+      }
+    },
+    async mounted () {
+      this.isLoading = true
+      await this.$store.dispatch(types.TASKS)
+      this.isLoading = false
     }
   }
 </script>
@@ -67,13 +83,13 @@
 <style lang="scss">
   .spacing { padding: 1rem; }
 
-  .task-view .title {
+  .tasks-view .title {
     position: relative;
 
     & > .button {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      top: -.25rem;
+      right: 0;
     }
   }
 </style>

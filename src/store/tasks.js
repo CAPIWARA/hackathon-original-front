@@ -6,12 +6,22 @@ const state = {
 }
 
 const getters = {
-  [types.TASKS]: (state) => state.tasks
+  [types.TASKS]: (state) => {
+    return [ ...state.tasks ].sort(
+      ({ title: a = '' }, { title: b = '' }) => {
+        return a.localeCompare(b)
+      }
+    )
+  }
 }
 
 const mutations = {
   [types.TASKS]: (state, payload) => {
     state.tasks = payload
+  },
+  [types.TASKS_UPDATE]: (state, payload) => {
+    const tasks = [ ...state.tasks ].filter((task) => task.id !== payload.id)
+    state.tasks = [ ...tasks, payload ]
   }
 }
 
@@ -24,15 +34,19 @@ const actions = {
     await axios.post('/task', payload)
     await dispatch(types.TASKS)
   },
-  [types.TASKS_EXCLUDE]: async ({ dispatch }, payload) => {
-    const task = { ...payload, status: 'deleted' }
-    await axios.put(`/task/${task.id}`, task)
-    await dispatch(types.TASKS)
+  [types.TASKS_EXCLUDE]: ({ commit }, payload) => {
+    const status = payload.status === 'deleted' ? 'pending' : 'deleted'
+    const task = { ...payload, status }
+    commit(types.TASKS_UPDATE, task)
   },
-  [types.TASKS_COMPLETE]: async ({ dispatch }, payload) => {
+  [types.TASKS_COMPLETE]: ({ commit }, payload) => {
     const status = payload.status === 'completed' ? 'pending' : 'completed'
     const task = { ...payload, status }
-    await axios.put(`/task/${task.id}`, task)
+    commit(types.TASKS_UPDATE, task)
+  },
+  [types.TASKS_UPDATE]: async ({ dispatch, getters }, payload) => {
+    const tasks = [ ...getters[types.TASKS] ]
+    await Promise.all(tasks.map((task) => axios.put(`/task/${task.id}`, task)))
     await dispatch(types.TASKS)
   }
 }

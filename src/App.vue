@@ -34,21 +34,6 @@
     @extend %-default-font;
   }
 
-  h1, h2 {
-    margin: 0;
-    padding: .75rem .75rem;
-    box-sizing: border-box;
-    font-weight: 300;
-
-    &::after {
-      display: block;
-      width: 30px;
-      height: 2px;
-      background-color: #fff;
-      content: '';
-    }
-  }
-
   .button {
     background-color: transparent;
     color: #fff;

@@ -5,7 +5,9 @@
       <span class="title">{{ title }}</span>
       <span class="reward">{{ reward }}</span>
     </h3>
-    <button class="button -exclude" @click="exclude">×</button>
+    <button class="button -exclude" @click="exclude">
+      {{ status === 'deleted' ? '⤺' : '✕' }}
+    </button>
   </li>
 </template>
 
@@ -66,7 +68,7 @@
       border-radius: 50%;
       background-color: transparent;
       color: #fff;
-      font-size: 2rem;
+      font-size: 1rem;
       line-height: calc(2rem - 3px);
     }
 

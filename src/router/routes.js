@@ -1,19 +1,10 @@
 export default [
   {
-    path: '/',
-    name: 'Home',
-    component: () => import('../components/Home/HomeView')
-  },
-  {
     path: '/tasks',
-    component: () => import('../components/Task/TaskView')
+    component: () => import('../views/Tasks')
   },
   {
     path: '/task',
-    component: () => import('../components/Task/TaskForm')
-  },
-  {
-    path: '/wallet',
-    component: () => import('../components/Wallet/WalletView')
+    component: () => import('../views/Task')
   }
 ]
