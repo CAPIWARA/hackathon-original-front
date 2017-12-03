@@ -40,16 +40,12 @@
         isLoading: false,
         tabs: [
           {
+            text: 'Pendentes',
+            path: '/tasks?status=pending',
+          },
+          {
             text: 'Todas',
             path: '/tasks',
-          },
-          {
-            text: 'Concluídas',
-            path: '/tasks?status=completed',
-          },
-          {
-            text: 'Excluídas',
-            path: '/tasks?status=deleted',
           }
         ]
       }

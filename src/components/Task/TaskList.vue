@@ -36,7 +36,7 @@
     margin: 0;
     padding: .5rem 1rem;
 
-    & > .item + .item {
+    & > .item {
       margin-top: 1rem;
     }
   }

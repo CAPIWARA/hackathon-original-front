@@ -2,7 +2,7 @@
   <view-container class="task-view" :is-loading="isLoading">
     <span slot="title">Cadastrar Tarefa</span>
 
-    <form-container class="task-form" @submit="include">
+    <form-container class="task-form">
       <form-field
         v-model="title"
         id="title"
@@ -49,6 +49,7 @@
       class="button"
       slot="footer"
       type="submit"
+      @click="include"
       :disabled="!isValid"
     >Adicionar</button>
   </view-container>
@@ -122,7 +123,7 @@
       },
       goBack () {
         this.clean()
-        this.$router.push('/tasks')
+        this.$router.push('/tasks?status=pending')
       }
     }
   }
