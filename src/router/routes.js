@@ -6,5 +6,9 @@ export default [
   {
     path: '/task',
     component: () => import('../views/Task')
+  },
+  {
+    path: '/children',
+    component: () => import('../views/Children')
   }
 ]

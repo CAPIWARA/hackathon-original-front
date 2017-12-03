@@ -1,5 +1,5 @@
 <template>
-  <main class="view-container">
+  <main :class="['view-container', { '-footerless': !$slots.footer }]">
     <view-loading v-if="isLoading" />
 
     <section v-if="!isLoading" class="content">
@@ -9,7 +9,7 @@
       <slot />
     </section>
 
-    <footer v-if="!isLoading" class="footer">
+    <footer v-if="!isLoading && $slots.footer" class="footer">
       <slot name="footer" />
     </footer>
   </main>
@@ -35,6 +35,8 @@
       overflow: auto;
       height: calc(100vh - (60px + 60px));
     }
+
+    &.-footerless > .content { height: calc(100vh - 60px); }
 
     & > .footer {
       box-sizing: border-box;
