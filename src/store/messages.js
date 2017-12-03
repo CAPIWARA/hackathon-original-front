@@ -2,7 +2,16 @@ import axios from 'axios'
 import * as types from './types'
 
 const state = {
-  messages: []
+  messages: [
+    {
+      text: 'Oi, Rose!',
+      sender: 'bot'
+    },
+    {
+      text: 'O que você quer saber?',
+      sender: 'bot'
+    }
+  ]
 }
 
 const getters = {
@@ -19,13 +28,18 @@ const actions = {
   [types.MESSAGES]: async ({ commit, dispatch }) => {
     setTimeout(() => dispatch(types.MESSAGES), 500)
   },
-  [types.MESSAGES_SEND]: ({ commit }, payload) => {
-    const message = {
+  [types.MESSAGES_SEND]: async ({ commit }, payload) => {
+    commit(types.MESSAGES, {
       text: payload,
       sender: 'user'
-    }
+    })
 
-    commit(types.MESSAGES, message)
+    const { data: text } = await axios.get('chatbot/' + payload)
+
+    commit(types.MESSAGES, {
+      text,
+      sender: 'bot'
+    })
   }
 }
 

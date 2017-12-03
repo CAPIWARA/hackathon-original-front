@@ -3,7 +3,7 @@
     <view-loading v-if="isLoading" />
 
     <section v-if="!isLoading" class="content">
-      <h1 class="title">
+      <h1 class="title" v-if="$slots.title">
         <slot name="title" />
       </h1>
       <slot />
