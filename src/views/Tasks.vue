@@ -14,8 +14,6 @@
 
     <section class="spacing" v-else>
       <p>Ainda não há tarefas cadastradas.</p>
-      <br />
-      <router-link to="/task" class="button">Cadastrar Tarefas</router-link>
     </section>
 
     <button

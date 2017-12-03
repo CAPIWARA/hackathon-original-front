@@ -6,6 +6,10 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://192.168.2.230:8080/'
 
+Vue.filter('toCurrency', (value) => {
+  return +value.toFixed(2)
+})
+
 new Vue({
   el: '#app',
   store,

@@ -3,20 +3,7 @@ import axios from 'axios'
 
 const state = {
   child: null,
-  children: [
-    {
-      id: 2,
-      name: 'Gustavo Silva',
-      avatar: 'http://bit.ly/2i9RKNr',
-      account: '0198737'
-    },
-    {
-      id: 8,
-      name: 'Míriam Silva',
-      avatar: 'http://bit.ly/2BEBufX',
-      account: '0198742'
-    }
-  ]
+  children: []
 }
 
 const getters = {
@@ -36,26 +23,13 @@ const mutations = {
 const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time))
 
 const actions = {
-  [types.CHILD_CHOOSE]: ({ commit }, payload) => commit(types.CHILD, payload),
-  [types.CHILDREN]: async ({ commit }) => {
-    // const { data: children } = await axios.get('/child/')
-    
-    await sleep(1000)
-    const children = [
-      {
-        id: 2,
-        name: 'Gustavo Silva',
-        avatar: 'http://bit.ly/2i9RKNr',
-        account: '0198737'
-      },
-      {
-        id: 8,
-        name: 'Míriam Silva',
-        avatar: 'http://bit.ly/2BEBufX',
-        account: '0198742'
-      }
-    ]
-
+  [types.CHILD_CHOOSE]: async ({ commit }, payload) => {
+    const { data: child } = await axios.get(`/child/balance/${payload.id}`)
+    commit(types.CHILD, child)
+  },
+  [types.CHILDREN]: async ({ commit, getters }) => {
+    const user = getters[types.USER]
+    const { data: children } = await axios.get(`/child/${user.id}`)
     commit(types.CHILDREN, children)
   }
 }

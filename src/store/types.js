@@ -13,3 +13,16 @@ export const TASKS_COMPLETE = 'tasks/TASKS_COMPLETE'
 export const CHILD        = 'children/CHILD'
 export const CHILD_CHOOSE = 'children/CHILD_CHOOSE'
 export const CHILDREN     = 'children/CHILDREN'
+
+/**
+ * Tipos da "store" de desejos.
+ */
+export const WISHS = 'wishs/WISHS'
+
+/**
+ * Tipos da "store" de usuários.
+ */
+export const USER = 'user/USER'
+
+export const MESSAGES      = 'messages/MESSAGES'
+export const MESSAGES_SEND = 'messages/MESSAGES_SEND'

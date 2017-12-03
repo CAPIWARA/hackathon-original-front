@@ -26,12 +26,15 @@ const mutations = {
 }
 
 const actions = {
-  [types.TASKS]: async ({ commit }) => {
-    const { data: tasks } = await axios.get('/task')
+  [types.TASKS]: async ({ commit, getters }) => {
+    const child = getters[types.CHILD]
+    const { data: tasks } = await axios.get(`/task/${child.id}`)
     commit(types.TASKS, tasks)
   },
-  [types.TASKS_INCLUDE]: async ({ dispatch }, payload) => {
-    await axios.post('/task', payload)
+  [types.TASKS_INCLUDE]: async ({ dispatch, getters }, payload) => {
+    const child = getters[types.CHILD]
+    const task = { ...payload, idchild: child.id }
+    await axios.post('/task', task)
     await dispatch(types.TASKS)
   },
   [types.TASKS_EXCLUDE]: ({ commit }, payload) => {
@@ -46,7 +49,7 @@ const actions = {
   },
   [types.TASKS_UPDATE]: async ({ dispatch, getters }, payload) => {
     const tasks = [ ...getters[types.TASKS] ]
-    await Promise.all(tasks.map((task) => axios.put(`/task/${task.id}`, task)))
+    await Promise.all(tasks.map((task) => axios.put(`/task/1/${task.id}`, task)))
     await dispatch(types.TASKS)
   }
 }
