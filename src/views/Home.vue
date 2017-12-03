@@ -1,6 +1,6 @@
 <template>
   <view-container class="home-view">
-    <span slot="title">Sobre o Originho</span>
+    <span slot="title">Sobre o Origininho</span>
 
     <child-pill
       :avatar="child.avatar"
@@ -19,7 +19,7 @@
 
       <router-link
         class="button"
-        to="/tasks"
+        to="/tasks?status=pending"
       >Gerenciar Tarefas</router-link>
     </section>
 

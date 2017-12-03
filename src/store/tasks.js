@@ -49,7 +49,7 @@ const actions = {
   },
   [types.TASKS_UPDATE]: async ({ dispatch, getters }, payload) => {
     const tasks = [ ...getters[types.TASKS] ]
-    await Promise.all(tasks.map((task) => axios.put(`/task/1/${task.id}`, task)))
+    await Promise.all(tasks.map((task) => axios.put(`/task/${task.id}`, task)))
     await dispatch(types.TASKS)
   }
 }

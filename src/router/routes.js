@@ -10,7 +10,7 @@ const isPermissionChildren = (_, __, next) => {
 
 export default [
   {
-    path: '/tasks?status=pending',
+    path: '/tasks',
     beforeEnter: isPermissionChildren,
     component: () => import('../views/Tasks')
   },
@@ -32,5 +32,9 @@ export default [
   {
     path: '/example',
     component: () => import('../views/IOT')
+  },
+  {
+    path: '/chat',
+    component: () => import('../views/Chat')
   }
 ]
