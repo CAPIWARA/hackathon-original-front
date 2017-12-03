@@ -1,6 +1,10 @@
 /**
  * Cores
  */
-$color-primary: #70bf54;
-$color-primary-dark: #4daa62;
+$color-primary: #76b742;
+$color-primary-dark: #007d7b;
+
 $color-border: #e0e0e0;
+
+$color-danger: #ef4836;
+$color-danger-dark: darken($color-danger, 10%);

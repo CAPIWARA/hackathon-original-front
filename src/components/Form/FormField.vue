@@ -12,7 +12,7 @@
       @input="input"
     >
       <template v-if="component === 'select'">
-        <option v-if="placeholder" disabled selected>{{ placeholder }}</option>
+        <option v-if="placeholder" class="placeholder" disabled selected>{{ placeholder }}</option>
         <option
           v-for="option in options"
           :key="option.value"
@@ -68,10 +68,12 @@
     & > .label {
       display: block;
       font-size: .9rem;
+      font-weight: 300;
       margin-bottom: .25rem;
     }
 
     & > .field {
+      color: #fff;
       box-sizing: border-box;
       display: block;
       width: 100%;
@@ -81,6 +83,11 @@
       border-bottom: 2px solid $color-border;
       background-color: rgba(#000, .025);
       transition: border-bottom-color .3s ease;
+    }
+
+    & > .field::placeholder,
+    & > select.field[value=""] {
+      color: rgba(#fff, .5);
     }
 
     & > .field:focus {

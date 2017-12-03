@@ -1,19 +1,32 @@
 <template>
-  <router-view />
+  <main class="app-container">
+    <header-container />
+    <router-view />
+  </main>
 </template>
 
+<script>
+  import HeaderContainer from './components/Header/HeaderContainer'
+
+  export default {
+    components: { HeaderContainer }
+  }
+</script>
+
 <style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,500,500i');
+  @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500');
   @import './style/theme.scss';
 
   %-default-font {
     font-size: 1rem;
     font-weight: 300;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   body {
     margin: 0;
+    background-image: linear-gradient($color-primary, $color-primary-dark);
+    color: #fff;
     @extend %-default-font;
   }
 
@@ -26,25 +39,27 @@
     padding: .75rem .75rem;
     box-sizing: border-box;
     font-weight: 300;
+
     &::after {
       display: block;
       width: 30px;
       height: 2px;
-      background-color: $color-primary;
+      background-color: #fff;
       content: '';
     }
   }
 
   .button {
-    background-color: $color-primary;
+    background-color: transparent;
     color: #fff;
     padding: .5rem 1rem;
     border: 0 none transparent;
-    border-bottom: 2px solid $color-primary-dark;
-    border-radius: 0;
+    border: 2px solid #fff;
+    border-radius: 1.75rem;
     font-size: 1rem;
     font-weight: 500;
     text-transform: uppercase;
+    text-decoration: none;
   }
 
   .button:focus {
@@ -60,7 +75,7 @@
   }
 
   .button[disabled] {
-    background-color: $color-border;
-    border-bottom-color: darken($color-border, 10%);
+    color: $color-border;
+    border-color: darken($color-border, 10%);
   }
 </style>

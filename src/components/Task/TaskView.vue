@@ -1,39 +1,59 @@
 <template>
-  <main class="task-view">
-    <h1>Tarefas</h1>
+  <form-container class="task-view">
+    <h1 class="title">
+      <span>Tarefas</span>
+      <router-link class="button" to="/task">Cadastrar Tarefas</router-link>
+    </h1>
 
-    <input type="checkbox" v-model="isDeleted" />
+    <template v-if="tasks.length">
+      <navigation-tabs :tabs="tabs" />
+      <task-list :tasks="filtered" />
+    </template>
 
-    <task-list :tasks="filtered" />
+    <section class="spacing" v-else>
+      <p>Ainda não há tarefas cadastradas.</p>
+      <br />
+      <router-link to="/task" class="button">Cadastrar Tarefas</router-link>
+    </section>
 
-    <hr>
-
-    <h2>Adicionar uma Tarefa</h2>
-
-    <task-form />
-  </main>
+    <button slot="actions" class="button" type="submit">Confirmar</button>
+  </form-container>
 </template>
 
 <script>
   import * as types from '../../store/types'
-  import TaskForm from './TaskForm'
+  import FormContainer from '../Form/FormContainer'
   import TaskList from './TaskList'
+  import NavigationTabs from '../Navigation/NavigationTabs'
   import { mapGetters } from 'vuex'
 
   export default {
-    components: { TaskForm, TaskList },
+    components: { FormContainer, TaskList, NavigationTabs },
     data () {
       return {
-        isDeleted: true
+        tabs: [
+          {
+            text: 'Todas',
+            path: '/tasks',
+          },
+          {
+            text: 'Concluídas',
+            path: '/tasks?status=completed',
+          },
+          {
+            text: 'Excluídas',
+            path: '/tasks?status=deleted',
+          }
+        ]
       }
     },
     computed: {
       ...mapGetters({ tasks: types.TASKS }),
       filtered () {
         const tasks = [ ...this.tasks ].filter((task) => {
-          if (this.isDeleted)
-            return task.status === 'deleted'
-          return task.status !== 'deleted'
+          const status = this.$route.query.status
+          const result = status ? task.status === status : task.status !== 'deleted'
+          return result
         })
         return tasks
       }
@@ -43,3 +63,17 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .spacing { padding: 1rem; }
+
+  .task-view .title {
+    position: relative;
+
+    & > .button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+  }
+</style>

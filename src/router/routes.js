@@ -5,8 +5,12 @@ export default [
     component: () => import('../components/Home/HomeView')
   },
   {
-    path: '/task',
+    path: '/tasks',
     component: () => import('../components/Task/TaskView')
+  },
+  {
+    path: '/task',
+    component: () => import('../components/Task/TaskForm')
   },
   {
     path: '/wallet',

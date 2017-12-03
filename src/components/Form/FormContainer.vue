@@ -1,6 +1,8 @@
 <template>
   <form class="form-container" @submit.prevent="submit">
-    <slot></slot>
+    <fieldset class="fields">
+      <slot />
+    </fieldset>
     <fieldset class="actions">
       <slot name="actions"></slot>
     </fieldset>
@@ -19,6 +21,9 @@
 
 <style lang="scss">
   .form-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 
     & > .fields,
     & > .actions {
@@ -34,7 +39,7 @@
     }
 
     & > .actions {
-      margin-top: 1.25rem;
+      margin-top: auto;
       border-top: 2px solid #eaedef;
       padding: .5rem 1rem;
       text-align: right;

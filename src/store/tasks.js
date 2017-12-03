@@ -2,15 +2,7 @@ import * as types from './types'
 import axios from 'axios'
 
 const state = {
-  tasks: [
-    {
-      id: 12,
-      title: 'Arrumar o quarto',
-      description: 'Dobrar lençois, varrer o chão e organizar seus brinquedos.',
-      reward: 3.3,
-      status: 'pending'
-    }
-  ]
+  tasks: []
 }
 
 const getters = {
@@ -34,6 +26,12 @@ const actions = {
   },
   [types.TASKS_EXCLUDE]: async ({ dispatch }, payload) => {
     const task = { ...payload, status: 'deleted' }
+    await axios.put(`/task/${task.id}`, task)
+    await dispatch(types.TASKS)
+  },
+  [types.TASKS_COMPLETE]: async ({ dispatch }, payload) => {
+    const status = payload.status === 'completed' ? 'pending' : 'completed'
+    const task = { ...payload, status }
     await axios.put(`/task/${task.id}`, task)
     await dispatch(types.TASKS)
   }
